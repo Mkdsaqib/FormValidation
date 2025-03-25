@@ -4,6 +4,9 @@ import Facebook from "../MyComponent/images/face.svg";
 import Google from "../MyComponent/images/google.svg";
 import Linkedin from "../MyComponent/images/in.svg";
 
+
+
+
 export const Test = () => {
 
 
@@ -18,6 +21,12 @@ export const Test = () => {
 
   const [items, setItems] = useState([]); 
   const [message, setMessage] = useState("");
+  
+ 
+
+ 
+
+ 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,9 +35,20 @@ export const Test = () => {
 
   const addItem = (e) => {
     e.preventDefault();
+    alert(message)
 
+    
     if (!inputData.name || !inputData.username || !inputData.email || !inputData.contact || !inputData.password || !inputData.Cpassword) {
       setMessage("All fields are required for SignUp.");
+      return;
+    }
+
+    if (inputData.name.trim().toLowerCase() === inputData.username.trim().toLowerCase()) {
+      setMessage("Please choose a different username from your name");
+      return;
+    }
+    if (inputData.contact.length !== 11) {
+      setMessage("Phone number must be exactly 11 digits");
       return;
     }
    
@@ -85,7 +105,10 @@ export const Test = () => {
   
   const handleLogin = (e) => {
     e.preventDefault();
+    alert( message)
+
   
+
     const storedUsers = JSON.parse(localStorage.getItem("items")) || [];
   
     const user = storedUsers.find(user => user.email === loginData.email);
@@ -97,12 +120,16 @@ export const Test = () => {
   
     if (user.password !== loginData.password) {
       setMessage("Incorrect password.");
+     
       return;
     }
-  
+     
     setMessage("Sign in successful!");
-
     
+ 
+   
+
+
     
     localStorage.setItem("loggedInUser", JSON.stringify(user));
   
@@ -221,7 +248,7 @@ export const Test = () => {
                   SIGN UP
                 </button>
               </div>
-              {message && <p className="message">{message}</p>}
+            
             </form>
           </div>
         </div>
@@ -254,7 +281,9 @@ export const Test = () => {
               Forgot your <span>password</span>?
             </p>
           
-            {message && <p className="message">{message}</p>}
+           
+            
+            
           </div>
           <div className="Container-login">
             <div className="welcome-login">
